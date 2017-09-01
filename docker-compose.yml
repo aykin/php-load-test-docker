@@ -1,0 +1,22 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "2"
+services:
+
+    redis:
+      image: redis:alpine
+      container_name: loadtest-redis
+
+    php:
+      build: web
+      working_dir: /app
+      volumes:
+        - .:/app
+        - ./web/php-ini-overrides.ini:/etc/php/7.1/cli/conf.d/99-overrides.ini
+
+    commander:
+      build: commander
+      working_dir: /app
+      volumes:
+        - .:/app
